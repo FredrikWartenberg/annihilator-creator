@@ -1,7 +1,9 @@
 # annihilator-creator
 
 Code for expanding sequences of annihilation and operators into normal order. Sequences are input as strings, where
-'a' represents on annihilation operator and 'd'a creation operator (d for 'a dagger').
+'a' represents on annihilation operator and 'd' a creation operator (d for 'a dagger').
+
+For the background and formalism see [Annihilation and Creation Operators](https://en.wikipedia.org/wiki/Creation_and_annihilation_operators)
 
 ## Function Interface
 (from R session)
