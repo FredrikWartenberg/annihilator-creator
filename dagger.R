@@ -53,7 +53,6 @@ normalize <- function(x) {
     return(EXPRESSION)
 }
 
-## Uses run length encoding (rel)
 ##' Compact TERMS to CTERMS
 ##'
 ##' Compact TERMS of fromat [d*a*,1*] fromat into
@@ -65,6 +64,7 @@ normalize <- function(x) {
 ##' @return a CTERM (string)
 ##' @author 
 compact <- function(x) {
+    # Use run length encoding
     rl <- rle(unlist(strsplit(x,"")))
     CTERM <- ""
     for(i in seq(1:length(rl$values))) {
@@ -73,22 +73,31 @@ compact <- function(x) {
     CTERM
 }
 
-##' Normalize a TERM into a compact normal form CEXPRESSION
+##' Normalize a TERM into a CEXPRESSION
 ##'
-##' Produces an Expression of CTERMs from a TERM equal CTERMS
+##' Produces an CEPXPRESSION of CTERMs from a TERM.
 ##' are counted with the CEXPRESSION being represented as a
 ##' data.table with each row representing the sum of N CTERMS
 ##' and the entire table representing the fully expanded
 ##' CEXPRESSION as the sum of rows
+##' N can be multiplied by an optional factor
 ##' @title Generate Compact Normal Form
 ##' @param x a string representing a TERM to expand
-##' @param factor for the term in an expression
+##' @param factor for the term in an expression [default = 1]
 ##' @return a CEXPRESSION represented as data.table
 ##' @author Fredrik Wartenberg
 compactNormalForm <- function(x,factor=1) {
     DT <- normalize(data.table(TERM=x))
-    DT[,compact:=unlist(lapply(X=TERM,FUN=compact))]
-    CEXPRESSION <- DT[,.N,by=compact][,c("N","compact")]
+    DT[,CTERM:=unlist(lapply(X=TERM,FUN=compact))]
+    CEXPRESSION <- DT[,.N,by=CTERM][,c("N","CTERM")]
     CEXPRESSION[,N := N* factor]
     return(CEXPRESSION[])
 }
+
+compactOneLine <- function(x,factor=1) {
+    CNF <- compactNormalForm(x,factor)
+    CNF[,PTERM:=paste(N,CTERM,sep='*')]
+    return(paste(CNF$PTERM,collapse = " + "))
+}
+
+                 
