@@ -30,3 +30,6 @@ curl "http://127.0.0.1:8000/normalOrder?term=aaba"
                                  Dload  Upload   Total   Spent    Left  Speed
 100    31  100    31    0     0   5153      0 --:--:-- --:--:-- --:--:--  6200{"normalOrder":["1*a^2b^1a^1"]}
 ```
+
+### Caveats
+The implementation is highly inefficient, so calculation for longer strings may take a long time.
