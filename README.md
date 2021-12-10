@@ -1,6 +1,6 @@
 # annihilator-creator
 
-Code for expanding sequences of annihilation and operators into normal order. Sequences are input as strings, where
+Code for expanding sequences of annihilation and creation operators into normal order. Sequences are input as strings, where
 'a' represents on annihilation operator and 'd' a creation operator (d for 'a dagger').
 
 For the background and formalism see [Annihilation and Creation Operators](https://en.wikipedia.org/wiki/Creation_and_annihilation_operators)
